@@ -1,16 +1,25 @@
-import React from 'react'
-
+import React, { RefObject } from "react"
 
 export default class NameForm extends React.Component {
-    render() {
-        return (
-            <div>
-                <form> 
-                    <input type="text"/>
-                    <button>Submit </button>
-                </form>
-            </div>
-        );
-    }
-}
+    nameRef: RefObject<HTMLInputElement> = React.createRef()
 
+    handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+      
+    
+        if (this.nameRef.current) {
+            alert(this.nameRef.current.value)
+        }
+    }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" ref={this.nameRef} />
+          <button>Submit </button>
+        </form>
+      </div>
+    )
+  }
+}
